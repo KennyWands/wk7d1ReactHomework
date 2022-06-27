@@ -1,24 +1,57 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [jobs, setJobs] = useState([
+    { name: "Change brake ligths", isDone: false },
+    { name: "Fill transmission fluid", isDone: false },
+    { name: "Get wheel arch covers", isDone: false }
+  ]);
+  const [newJob, setNewJob] = useState("");
+
+  const jobNodes = jobs.map((job, index) => {
+    return (
+      <li key={index} >
+        <span>{job.name}</span>
+        {job.isDone ? <span>Done</span> : <button onClick={() => markAsDone(index)}>Done</button>}
+      </li>
+    )
+  });
+
+  const handleJobInput = (event) => {
+    setNewJob(event.target.value)
+    // whats this^^^^^^^^^^^^
+  }
+  const addNewJob = (event) => {
+    event.preventDefault();
+    const copyJobs = [...jobs];
+    copyJobs.push({ name: newJob, isDone: false })
+    setJobs(copyJobs)
+    setNewJob("")
+  }
+
+  const markAsDone = (index) => {
+    const copyJobs = [...jobs];
+    copyJobs[index].isDone = true;
+    setJobs(copyJobs)
+  }
+
+
+
+  //App return
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Truck Problems</h1>
+
+      <ul>
+        {jobNodes}
+      </ul>
+      <form onSubmit={addNewJob}>
+        <label htmlFor="new-Job"> What else needs fixed? </label>
+        <input type="text" value={newJob} onChange={handleJobInput} />
+        <input type="submit" value="save problem" />
+      </form>
+    </>
   );
 }
 
