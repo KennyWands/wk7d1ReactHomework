@@ -32,7 +32,20 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.jobList {
+  display: grid;
+  grid-auto-columns: 33% 33% 33%;
+  grid-column: 1/ span 2;
+  padding-right: 2rem;
+}
+
+.jobs {
+  grid-column: 3/3;
+  /* padding : 1rem; */
 }

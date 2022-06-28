@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   const [jobs, setJobs] = useState([
-    { name: "Change brake ligths", isDone: false },
+    { name: "Change brake lights", isDone: false },
     { name: "Fill transmission fluid", isDone: false },
     { name: "Get wheel arch covers", isDone: false }
   ]);
@@ -11,9 +11,11 @@ function App() {
 
   const jobNodes = jobs.map((job, index) => {
     return (
-      <li key={index} >
+      <li class = "jobList"  key={index} >
         <span>{job.name}</span>
+        <span class ="jobs">
         {job.isDone ? <span>Done</span> : <button onClick={() => markAsDone(index)}>Done</button>}
+        </span>
       </li>
     )
   });
@@ -49,7 +51,7 @@ function App() {
       <form onSubmit={addNewJob}>
         <label htmlFor="new-Job"> What else needs fixed? </label>
         <input type="text" value={newJob} onChange={handleJobInput} />
-        <input type="submit" value="save problem" />
+        <input type="submit" value="Save Problem" />
       </form>
     </>
   );
